@@ -6,3 +6,8 @@ Both C++ and Python versions are included. All this does is play the card game W
 Python will write the results to a file.
 
 C++ does not, but runs much faster
+
+****************************
+Changelog
+****************************
+Removed bug C++ that would cause errors when ties caused a win condition with les than 3 cards in a deck

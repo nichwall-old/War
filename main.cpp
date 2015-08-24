@@ -21,7 +21,7 @@ std::vector<int> shuffleDeck(std::vector<int> cards, int suitCount) {
 	}
 	
 	// Shuffle the cards
-	for (int i=0; i<10000; i++) {
+	for (int i=0; i<100000; i++) {
 		// Random number 1
 		// Random number 2
 		int first = rand()%52;
@@ -134,18 +134,24 @@ int main() {
 			for (int i=0; i<cardsWon; i++) {
 				switch (winner) {
 					case -1:
-						player2.push_back(player1.at(0));
-						// Remove player 1 card
-						player1.erase(player1.begin(), player1.begin()+1);
+						if (player1.size() != 0) {
+							player2.push_back(player1.at(0));
+							// Remove player 1 card
+							player1.erase(player1.begin(), player1.begin()+1);
+						}
 					case 1:
-						player1.push_back(player2.at(0));
-						// Remove player 2 card
-						player2.erase(player2.begin(), player2.begin()+1);
+						if (player2.size() != 0) {
+							player1.push_back(player2.at(0));
+							// Remove player 2 card
+							player2.erase(player2.begin(), player2.begin()+1);
+						}
 						break;
 					case 2:
-						player2.push_back(player1.at(0));
-						// Remove player 1 card
-						player1.erase(player1.begin(), player1.begin()+1);
+						if (player1.size() != 0) {
+							player2.push_back(player1.at(0));
+							// Remove player 1 card
+							player1.erase(player1.begin(), player1.begin()+1);
+						}
 					default:
 						break;
 				}
