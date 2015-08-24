@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -21,7 +22,7 @@ std::vector<int> shuffleDeck(std::vector<int> cards, int suitCount) {
 	}
 	
 	// Shuffle the cards
-	for (int i=0; i<100000; i++) {
+	for (int i=0; i<1000000; i++) {
 		// Random number 1
 		// Random number 2
 		int first = rand()%52;
@@ -33,6 +34,9 @@ std::vector<int> shuffleDeck(std::vector<int> cards, int suitCount) {
 	}
 	
 	return deck;
+}
+std::vector<int> shuffleDeck(std::vector<int> cards) {
+	return shuffleDeck(cards, 4);
 }
 
 int dealCards(std::vector<int> deck) {
@@ -51,9 +55,9 @@ int dealCards(std::vector<int> deck) {
 
 int playerHasWon() {
 	if ( player1.size() == 0) {
-		return 1;
-	} else if (player2.size() == 0) {
 		return 2;
+	} else if (player2.size() == 0) {
+		return 1;
 	} else {
 		return 0;
 	}
@@ -103,12 +107,16 @@ std::string displayGraph() {
 }
 
 int main() {
+	// Open file to write to
+	std::ofstream logger;
+	logger.open("log.txt");
+	
 	// Initialize randomness
 	srand( time(NULL));
 	
 	// Create decks
 	std::vector<int> baseCards = {2,3,4,5,6,7,8,9,10,11,12,13,14};
-	std::vector<int> deck = shuffleDeck(baseCards, 4);
+	std::vector<int> deck = shuffleDeck(baseCards);
 	
 	// Deal cards
 	int dealSuccess = dealCards(deck);
@@ -158,6 +166,7 @@ int main() {
 			}
 			printf("%d\t",iterationCount);
 			std::cout << displayGraph() << "\n";
+			logger << displayGraph() << "\n";
 		}
 		printf("Player %d has won!\n",playerHasWon());
 		printf("Took %d iterations to win\n",iterationCount);
@@ -165,5 +174,6 @@ int main() {
 		printf("oopsie, error probably\n");
 	}
 	
+	logger.close();
 	return 0;
 }

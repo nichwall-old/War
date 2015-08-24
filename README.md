@@ -10,4 +10,6 @@ C++ does not, but runs much faster
 ****************************
 Changelog
 ****************************
-Removed bug C++ that would cause errors when ties caused a win condition with les than 3 cards in a deck
+C++ now writes to a file for viewing after wards!
+
+Removed bug in C++ that would cause errors when ties caused a win condition with les than 3 cards in a deck
